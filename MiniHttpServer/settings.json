@@ -1,0 +1,6 @@
+{
+  "PublicDirectoryPath": "public",
+  "Domain": "+",
+  "Port": "1337",
+  "Sql": "Host=postgres;Port=5432;Database=HttpServer;Username=postgres;Password=YOUR_DB_PASSWORD"
+}

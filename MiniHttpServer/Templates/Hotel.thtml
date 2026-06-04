@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Информация об отелях</title>
+    <link rel="stylesheet" href="/hotels/hotel-info.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Цикл по списку отелей -->
+    $foreach(var hotel in hotels)
+    <div class="hotel-wrapper">
+        <div class="hotel-header">
+            <div class = "stars">
+                ${hotel.Stars}
+            </div>
+            <h1 class="hotel-title">${hotel.Name} ${hotel.Stars}*</h1>
+            <div class="hotel-location">${hotel.Country}, ${hotel.City}</div>
+            <div class="nav-buttons">
+                <button class="nav-button active">Об отеле</button>
+                <button class="nav-button">Фото</button>
+                <button class="nav-button">На карте</button>
+                <button class="nav-button">Отзывы</button>
+            </div>
+        </div>
+
+					<div class="description">
+						<p class="rating ${hotel.RatingTag}">
+    ${hotel.Rating}
+						</p>
+
+
+						<p class ="description-text">${hotel.Description}</p>
+					</div>
+
+        <!-- Слайдер изображений отеля -->
+        <div class="slider-container">
+            <div class="slider-images" id="hotel-slider-${hotel.Id}">
+                $foreach(var image in hotel.Image_Names)
+                    <img class="slider-image" src="/hotels/data/${hotel.Country}/${hotel.City}/${hotel.Id}/${image}" alt="${hotel.Name}">
+                $endfor
+            </div>
+            <div class="slider-controls">
+                <button class="slider-control" data-slider="hotel-slider-${hotel.Id}" data-direction="prev">‹</button>
+                <button class="slider-control" data-slider="hotel-slider-${hotel.Id}" data-direction="next">›</button>
+            </div>
+            <div class="slider-dots" id="hotel-dots-${hotel.Id}"></div>
+        </div>
+        
+
+        <div class="section">
+            ${hotel.About_Hotel}
+            <h3 class="section-title">Типы номеров</h2>
+            <div class="section-content">
+                <ul>
+                    $foreach(var room in hotel.Hotel_Rooms)
+                        <li>${room.Name} — ${room.Description}</li>
+                    $endfor
+                </ul>
+            </div>
+            <h3>Примечание</h3>
+            <div>
+                ${hotel.Note}
+            </div>
+        </div>
+    </div>
+    $endfor
+
+    <script src="/hotels/js/slider.js"></script>
+    <script src="/hotels/js/stars.js"></script>
+</body>
+</html>

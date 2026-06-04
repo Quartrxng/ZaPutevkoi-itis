@@ -1,0 +1,45 @@
+services:
+  postgres:
+    image: postgres:15
+    container_name: postgres_db
+    environment:
+      POSTGRES_DB: HttpServer
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: YOUR_DB_PASSWORD
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - myapp-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 2s
+      timeout: 2s
+      retries: 10
+      start_period: 5s
+
+  app:
+    image: try14
+    build:
+        context: ..
+        dockerfile: Presentation/Dockerfile
+    container_name: try1
+    environment:
+      - ASPNETCORE_URLS=http://+:1337
+      - ConnectionStrings__DefaultConnection=Host=postgres;Port=5432;Database=HttpServer;Username=postgres;Password=YOUR_DB_PASSWORD
+    ports:
+      - "1337:1337"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - myapp-network
+
+volumes:
+  postgres_data:
+
+networks:
+  myapp-network:
+    driver: bridge

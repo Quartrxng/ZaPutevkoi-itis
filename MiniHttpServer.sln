@@ -1,0 +1,89 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36414.22
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniHttpServer", "MiniHttpServer\MiniHttpServer.csproj", "{3021FC1D-B7D6-41C9-994B-E6DCEB22CEF4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniTemplateEngine", "MiniTemplateEngine\MiniTemplateEngine.csproj", "{2E4E32FC-091A-4696-AF70-5CE255B6156E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniTemplateEngineTests", "MiniTemplateEngineTests\MiniTemplateEngineTests.csproj", "{3E0BD844-61AB-4FDB-ACF8-B2CEEEAE8017}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2E4E32FC-091A-4696-AF70-5CE255B6156E} = {2E4E32FC-091A-4696-AF70-5CE255B6156E}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniHttpServer.FrameWork", "MiniHttpServer.FrameWork\MiniHttpServer.FrameWork.csproj", "{B4C3586F-10D7-4B21-904D-A24D9F9B9ECE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyORMLibrary", "MyORMLibrary\MyORMLibrary.csproj", "{0217F254-36B0-40B2-90CD-4F59BF77CB24}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniHttpServer.Framework.UnitTests", "MiniHttpServer.Framework.Tests\MiniHttpServer.Framework.UnitTests.csproj", "{E78626BE-EE98-4462-9B38-77071B951B61}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyORMLibraryTests", "MyORMLibraryTests\MyORMLibraryTests.csproj", "{966B97A4-3CFE-4D59-B5DF-576754393683}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAO", "DAO\DAO.csproj", "{162F2533-7CE1-44C1-852C-06B7708839C5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModelsLibrary", "ModelsLibrary\ModelsLibrary.csproj", "{6EB31AEA-FD59-45F3-BDC1-ABAD71AF1DD3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Элементы решения", "Элементы решения", "{754FC069-D67B-A9D7-50A1-8D1CA196D8F1}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = docker-compose.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tables", "tables", "{36D591C7-65C7-A0D1-1CBC-10CDE441BDC8}"
+	ProjectSection(SolutionItems) = preProject
+		init.sql = init.sql
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3021FC1D-B7D6-41C9-994B-E6DCEB22CEF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3021FC1D-B7D6-41C9-994B-E6DCEB22CEF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3021FC1D-B7D6-41C9-994B-E6DCEB22CEF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3021FC1D-B7D6-41C9-994B-E6DCEB22CEF4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E4E32FC-091A-4696-AF70-5CE255B6156E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E4E32FC-091A-4696-AF70-5CE255B6156E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E4E32FC-091A-4696-AF70-5CE255B6156E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E4E32FC-091A-4696-AF70-5CE255B6156E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E0BD844-61AB-4FDB-ACF8-B2CEEEAE8017}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E0BD844-61AB-4FDB-ACF8-B2CEEEAE8017}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E0BD844-61AB-4FDB-ACF8-B2CEEEAE8017}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E0BD844-61AB-4FDB-ACF8-B2CEEEAE8017}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4C3586F-10D7-4B21-904D-A24D9F9B9ECE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4C3586F-10D7-4B21-904D-A24D9F9B9ECE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4C3586F-10D7-4B21-904D-A24D9F9B9ECE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4C3586F-10D7-4B21-904D-A24D9F9B9ECE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0217F254-36B0-40B2-90CD-4F59BF77CB24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0217F254-36B0-40B2-90CD-4F59BF77CB24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0217F254-36B0-40B2-90CD-4F59BF77CB24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0217F254-36B0-40B2-90CD-4F59BF77CB24}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E78626BE-EE98-4462-9B38-77071B951B61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E78626BE-EE98-4462-9B38-77071B951B61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E78626BE-EE98-4462-9B38-77071B951B61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E78626BE-EE98-4462-9B38-77071B951B61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{966B97A4-3CFE-4D59-B5DF-576754393683}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{966B97A4-3CFE-4D59-B5DF-576754393683}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{966B97A4-3CFE-4D59-B5DF-576754393683}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{966B97A4-3CFE-4D59-B5DF-576754393683}.Release|Any CPU.Build.0 = Release|Any CPU
+		{162F2533-7CE1-44C1-852C-06B7708839C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{162F2533-7CE1-44C1-852C-06B7708839C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{162F2533-7CE1-44C1-852C-06B7708839C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{162F2533-7CE1-44C1-852C-06B7708839C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6EB31AEA-FD59-45F3-BDC1-ABAD71AF1DD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6EB31AEA-FD59-45F3-BDC1-ABAD71AF1DD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6EB31AEA-FD59-45F3-BDC1-ABAD71AF1DD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6EB31AEA-FD59-45F3-BDC1-ABAD71AF1DD3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{36D591C7-65C7-A0D1-1CBC-10CDE441BDC8} = {754FC069-D67B-A9D7-50A1-8D1CA196D8F1}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {904C0957-0EE1-410C-B9B7-AA58AA406179}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,286 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Panel</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+
+        #hotelForm {
+            display: none;
+            background: #f3f3f3;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 10px;
+        }
+
+        .wysiwyg button {
+            margin-right: 5px;
+        }
+
+        .image-preview {
+            display: inline-block;
+            position: relative;
+            margin: 5px;
+        }
+
+        .image-preview img {
+            width: 120px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .room-images {
+            width: 100%;
+            min-height: 100px;
+            background: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 5px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+
+        .delete-img {
+            position: absolute;
+            top: 3px;
+            right: 3px;
+            background: red;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            width: 20px;
+            height: 20px;
+            line-height: 15px;
+            text-align: center;
+        }
+
+        .room-container {
+            background: #e9e9e9;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 7px;
+        }
+
+        .btn {
+            padding: 5px 10px;
+            background: #2196f3;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            background: #0b7dda;
+        }
+
+        .room-images {
+            margin-top: 5px;
+            padding: 5px;
+            background: #fff;
+            border-radius: 5px;
+        }
+        #hotelCard table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+            font-size: 14px;
+        }
+
+        #hotelCard td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            vertical-align: top;
+        }
+
+        #hotelCard strong {
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* Стили для основного описания отеля */
+        #hotelDescription table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+        }
+
+        #hotelDescription td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            vertical-align: top;
+        }
+
+        #hotelDescription strong {
+            font-weight: bold;
+        }
+
+
+        /* WYSIWYG панель */
+        .wysiwyg {
+            background: #f0f0f0;
+            padding: 8px;
+            border-radius: 6px;
+            margin-bottom: 5px;
+            border: 1px solid #ccc;
+        }
+
+            .wysiwyg button {
+                padding: 6px 10px;
+                font-size: 14px;
+                border: 1px solid #bbb;
+                background: #fff;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+
+                .wysiwyg button:hover {
+                    background: #e6e6e6;
+                }
+
+        /* Контентная область */
+        #hotelDescription,
+        #hotelCard {
+            border: 1px solid #ccc !important;
+            border-radius: 6px;
+            background: white;
+            padding: 10px;
+            min-height: 150px;
+            line-height: 1.5;
+        }
+
+        #hotelCard {
+            min-height: 120px;
+        }
+
+
+    </style>
+</head>
+
+<body>
+<h1>Админ панель – Отели</h1>
+
+<button class="btn" onclick="editingHotelId = null; selectedMeal = []; showHotelForm();">Создать отель</button>
+<button class="btn" onclick="logout()">Выйти</button>
+
+<hr>
+
+<div id="hotelsTableContainer">
+
+</div>
+
+<hr>
+
+<form id="hotelForm" onsubmit="event.preventDefault(); submitHotel();" data-method="POST" data-url="/adminapi/hotels" style="display:none;">
+
+    <h2>Отель</h2>
+
+    <div>
+        <label>Название</label><br>
+        <input type="text" id="hotelName" name="name" required>
+    </div>
+
+    <div>
+        <label>Звезды</label><br>
+        <input type="number" id="hotelStars" name="stars" min="1" max="5">
+    </div>
+
+    <div>
+        <label>Рейтинг</label><br>
+        <input type="number" id="hotelRating" name="rating" min="0" max="5" step="0.1">
+    </div>
+
+    <div>
+        <label>Страна</label><br>
+        <input type="text" id="hotelCountry" name="country">
+    </div>
+
+    <div>
+        <label>Город</label><br>
+        <input type="text" id="hotelCity" name="city">
+    </div>
+
+    <!-- Карточка отеля -->
+    <h3>Карточка отеля</h3>
+    <div class="wysiwyg">
+        <button type="button" onclick="formatCard('bold')" title="Жирный"><b>B</b></button>
+        <button type="button" onclick="formatCard('italic')" title="Курсив"><i>I</i></button>
+        <button type="button" onclick="formatCard('underline')" title="Подчеркивание"><u>U</u></button>
+        <button type="button" onclick="formatCard('createLink')" title="Ссылка">🔗</button>
+
+        <button type="button" onclick="formatCard('insertTable')" title="Вставить таблицу">📊 Таблица</button>
+        <button type="button" onclick="formatCard('insertRow')" title="Добавить строку">➕ Строка</button>
+        <button type="button" onclick="deleteCardRow()" title="Удалить строку">➖ Строка</button>
+        <button type="button" onclick="deleteCardTable()" title="Удалить таблицу">🗑️ Удалить таблицу</button>
+    </div>
+    <div id="hotelCard"
+         contenteditable="true"
+         style="width:100%; min-height:120px; background:white; border:1px solid #ccc; padding:10px; border-radius:5px; line-height:1.5;">
+    </div>
+    <input type="hidden" id="hotelCardInput" name="hotel_card">
+
+    <hr>
+    <h3>Описание отеля</h3>
+    <textarea id="hotelDescriptionText" style="width:100%; min-height:100px; padding:5px; border:1px solid #ccc; border-radius:5px;"></textarea>
+
+    <!-- WYSIWYG -->
+    <h3>Об отеле</h3>
+    <div class="wysiwyg">
+        <button type="button" onclick="format('bold')"><b>B</b></button>
+        <button type="button" onclick="format('italic')"><i>I</i></button>
+        <button type="button" onclick="format('underline')"><u>U</u></button>
+        <button type="button" onclick="format('insertUnorderedList')">• Список</button>
+        <button type="button" onclick="format('formatBlock','h3')">H3</button>
+        <button type="button" onclick="format('createLink')">🔗 Ссылка</button>
+    </div>
+    <div id="hotelDescription"
+         name="about_Hotel"
+         contenteditable="true"
+         style="width:100%; min-height:150px; background:white; border:1px solid #ccc; padding:10px; border-radius:5px;">
+    </div>
+
+    <hr>
+
+    <!-- IMAGES -->
+    <h3>Фотографии отеля</h3>
+    <div id="hotelImages"
+         ondrop="dropImage(event)"
+         ondragover="dragOver(event)"
+         style="background:#fff; padding:10px; min-height:120px; border:1px solid #ccc; border-radius:5px;">
+    </div>
+
+    <hr>
+
+    <!-- ROOMS -->
+    <h3>Комнаты</h3>
+    <button type="button" class="btn" onclick="addRoom()">Добавить комнату</button>
+    <div id="roomsContainer"></div>
+
+    <hr>
+
+    <!-- MEAL -->
+    <h3>Meal</h3>
+    <div id="mealSelect"></div>
+
+    <hr>
+
+    <!-- SERVICES -->
+    <h3>Сервисы</h3>
+    <div id="servicesContainer"></div>
+
+    <hr>
+
+    <button type="submit" class="btn">Сохранить</button>
+    <button type="button" class="btn" style="background:#888;" onclick="hideHotelForm()">Отмена</button>
+
+</form>
+
+<script src="js/admin.js"></script>
+
+</body>
+</html>

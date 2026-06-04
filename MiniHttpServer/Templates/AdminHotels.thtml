@@ -1,0 +1,39 @@
+﻿<table class="hotels-table" border="1" cellspacing="0" cellpadding="5">
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>Название</th>
+			<th>Звезды</th>
+			<th>Рейтинг</th>
+			<th>Город</th>
+			<th>Страна</th>
+			<th>Описание</th>
+			<th>Meal</th>
+			<th>Цена</th>
+			<th>Действия</th>
+		</tr>
+	</thead>
+	<tbody>
+		$foreach(var hotel in Hotels)
+		<tr>
+			<td>${hotel.id}</td>
+			<td>${hotel.name}</td>
+			<td>${hotel.stars}</td>
+			<td>${hotel.rating}</td>
+			<td>${hotel.city}</td>
+			<td>${hotel.country}</td>
+			<!--<td>${hotel.about_Hotel}</td>-->
+			<td>
+				$foreach(var meal in hotel.meal)
+				${meal}
+				$endfor
+			</td>
+			<td>${hotel.price}</td>
+			<td>
+				<button class="btn" onclick='editHotel(${hotel.id})'>Редактировать</button>
+				<button class="btn" onclick='deleteHotel(${hotel.id})'>Удалить</button>
+			</td>
+		</tr>
+		$endfor
+	</tbody>
+</table>

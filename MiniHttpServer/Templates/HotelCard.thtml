@@ -1,0 +1,85 @@
+﻿$foreach(var hotel in Hotels)
+<div class="card-wrapper">
+    <div class="card ${hotel.Name}">
+        <div class="image-container">
+            <img src="/hotels/data/${hotel.Country}/${hotel.City}/${hotel.Id}/${hotel.Image_Names[0]}" alt="Hotel" class="hotel-image">
+        </div>
+
+        <div class="content">
+            <div class="header">
+                <div>
+                    <div class="star-badge">
+                        ${hotel.stars}
+                    </div>
+                    <a class="hotel-name" href="hotel/${hotel.Id}">${hotel.Name} ${hotel.Stars}*</a>
+                    <p class="location">${hotel.City}, ${hotel.Country}</p>
+                    <div class="description">
+                        <p class="rating ${hotel.RatingTag}">${hotel.Rating}</p>
+                        <p class="description-text">${hotel.Description}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer">
+                <div class="buttons">
+                    <button class="btn" data-target="aboutcard">ОБ ОТЕЛЕ</button>
+                    <button class="btn" data-target="hotelrooms">НОМЕРА</button>
+                    <button class="btn">ОТЗЫВЫ</button>
+                    <button class="btn">КАРТА</button>
+                    <button class="heart-btn btn">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="price-container">
+                    <div class="price">${hotel.Price}</div>
+                    <div class="currency">РУБ</div>
+                    <button class="arrow-btn">
+                        <svg width="20" height="20" viewBox="0 0 306 306" style="transform: rotate(180deg)">
+                            <polygon points="247.35,35.7 211.65,0 58.65,153 211.65,306 247.35,270.3 130.05,153" fill="white"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="aboutcard hide">
+        <div class="gallery">
+            <div class="gallery-grid">
+                $foreach(var image in hotel.Image_Names)
+                <div class="gallery-item ${image}"><img src="/hotels/data/${hotel.Country}/${hotel.City}/${hotel.Id}/${image}" alt=""></div>
+                $endfor
+            </div>
+        </div>
+        <div class="info-section">
+            ${hotel.Card}
+        </div>
+
+        <div class="cardfooter">
+            <a class="details-btn" href="hotel/${hotel.Id}">Подробнее об отеле</a>
+        </div>
+    </div>
+    <div class="roomlist hide">
+        $foreach(var room in hotel.Hotel_Rooms)
+            <div class="room-item">
+            <img src="/hotels/data/${hotel.Country}/${hotel.City}/${hotel.Id}/Rooms/${room.photo}" alt="${room.name}" class="room-image">
+            <div class="room-details">
+                <h3>${room.Name}</h3>
+                <p>${room.Description}</p>
+            </div>
+            <div class="room-price">
+                <span class="price">${room.Price}</span>
+                <span class="currency">РУБ</span>
+                <i class="arrow-right">></i>
+            </div>
+        </div>
+        $endfor
+    </div>
+    <div class="preview-overlay">
+        <img class="preview-image" src="" alt="">
+    </div>
+</div>
+$endfor
